@@ -12,6 +12,18 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
+    env:
+      TF_VAR_public_subnet_1a_cidr: ${{ secrets.TF_VAR_public_subnet_1a_cidr }}
+      TF_VAR_public_subnet_1b_cidr: ${{ secrets.TF_VAR_public_subnet_1b_cidr }}
+      TF_VAR_private_subnet_1a_cidr: ${{ secrets.TF_VAR_private_subnet_1a_cidr }}
+      TF_VAR_private_subnet_1b_cidr: ${{ secrets.TF_VAR_private_subnet_1b_cidr }}
+      TF_VAR_app_port: ${{ secrets.TF_VAR_app_port }}
+      TF_VAR_hosted_zone_name: ${{ secrets.TF_VAR_hosted_zone_name }}
+      TF_VAR_app_domain_name: ${{ secrets.TF_VAR_app_domain_name }}
+      TF_VAR_uploads_bucket_name: ${{ secrets.TF_VAR_uploads_bucket_name }}
+      TF_VAR_alert_email: ${{ secrets.TF_VAR_alert_email }}
+      TF_VAR_lambda_function_name: ${{ secrets.TF_VAR_lambda_function_name }}
+
     defaults:
       run:
         working-directory: terraform/environments/prod
