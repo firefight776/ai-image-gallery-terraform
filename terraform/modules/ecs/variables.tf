@@ -36,7 +36,7 @@ variable "container_port" {
 variable "desired_count" {
   description = "Desired number of ECS tasks"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "uploads_bucket_arn" {
