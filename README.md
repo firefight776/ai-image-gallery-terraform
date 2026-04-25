@@ -39,11 +39,77 @@ GitHub Actions → CI/CD pipeline for automated deployments
 
 🏗️ Architecture
 
-Frontend → Static assets deployed via GitHub Actions (S3/hosting layer)
-Backend → Docker container deployed to AWS ECS
-Infrastructure → Provisioned via Terraform
-State Management → HCP Terraform workspace (ai-image-gallery-prod)
-CI/CD → GitHub Actions (frontend deployment + Terraform automation)
+🔷 Architecture Overview
+
+This project implements a production-style AI image gallery application deployed on AWS using Infrastructure as Code and a CI/CD pipeline.
+At a high level, the system enables users to upload images, store them in the cloud, and generate AI-powered descriptions using a serverless backend.
+
+🔷 System Flow (End-to-End)
+User Interaction
+Users access the application via a public URL routed through DNS.
+The frontend is served by a containerized web application.
+Frontend Application (ECS Fargate)
+The UI is hosted in a Docker container running on AWS ECS Fargate.
+Traffic is routed through an Application Load Balancer for high availability.
+Image Upload Workflow
+When a user uploads an image:
+The request is sent to a backend endpoint (Lambda/API).
+The image is stored in an S3 bucket.
+Metadata & AI Processing
+A Lambda function processes the uploaded image.
+The function:
+Calls Amazon Bedrock to generate an AI description
+Stores metadata (image URL, description) in DynamoDB
+Data Retrieval
+The frontend fetches stored image data and metadata from the backend.
+Images are displayed dynamically in the gallery.
+
+🔷 CI/CD Pipeline
+
+The application uses a modern CI/CD pipeline built with GitHub Actions:
+
+Code changes pushed to main trigger the dev deployment pipeline
+Releases/tags trigger the production deployment pipeline
+
+Pipeline Steps:
+Build Docker image
+Push image to Amazon ECR
+Deploy updated container to ECS service
+
+This ensures:
+Consistent deployments
+Automated infrastructure updates
+Environment separation (dev vs prod)
+🔷 Infrastructure Components
+Compute
+ECS Fargate – Runs containerized frontend application
+AWS Lambda – Handles backend processing and AI integration
+Storage
+Amazon S3 – Stores uploaded images and static assets
+DynamoDB – Stores image metadata and AI-generated descriptions
+Networking
+Application Load Balancer (ALB) – Routes traffic to ECS services
+VPC with private subnets – Secure application infrastructure
+CI/CD
+GitHub Actions – Automates build and deployment workflows
+Amazon ECR – Stores Docker images
+AI Integration
+Amazon Bedrock – Generates image descriptions
+Supporting Services
+IAM – Access control and permissions
+CloudWatch – Logging and monitoring
+Route 53 – DNS routing
+ACM – SSL/TLS certificates
+🔷 Key Design Decisions
+Serverless + Containers Hybrid
+ECS for frontend scalability
+Lambda for event-driven backend logic
+Environment Separation
+Dev and Prod pipelines ensure safe testing before release
+Infrastructure as Code
+Terraform used for reproducible and version-controlled infrastructure
+Event-Driven Processing
+Image uploads trigger backend workflows asynchronously
 
 🔁 CI/CD Workflow
 
@@ -85,14 +151,12 @@ Consistent and repeatable deployments
 
 ⚙️ Key Features
 
-Infrastructure fully managed with Terraform
-Remote state stored securely in HCP Terraform
-Automated CI/CD pipeline for infrastructure deployment
-Frontend deployment automated via GitHub Actions
-Containerized backend application using Docker
-Scalable backend deployment via AWS ECS
-Secure credential handling using GitHub Secrets
-Environment-based deployment model (dev/prod workspaces)
+- Infrastructure fully managed using Terraform
+- Remote state management with HCP Terraform
+- Automated CI/CD pipelines with GitHub Actions
+- Hybrid serverless and containerized architecture
+- Secure credential management using GitHub Secrets
+- Environment-based deployments using dev and prod workspaces
 
 🔐 Authentication & State Management
 
