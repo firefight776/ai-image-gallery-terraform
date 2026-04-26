@@ -64,6 +64,53 @@ Data Retrieval
 The frontend fetches stored image data and metadata from the backend.
 Images are displayed dynamically in the gallery.
 
+## 🏗️ Infrastructure as Code & Environment Strategy
+All infrastructure in this project was provisioned using Terraform with remote state managed in HCP Terraform. Separate development and production environments were implemented using isolated workspaces and configurations.
+
+<img width="1894" height="340" alt="Screenshot 2026-04-24 203231" src="https://github.com/user-attachments/assets/fada112d-8d2b-44f7-bd12-d7a44c53250b" />
+Terraform initialized with HCP backend, confirming remote state storage and workspace integration.
+
+<img width="1901" height="372" alt="Screenshot 2026-04-24 203439" src="https://github.com/user-attachments/assets/7780ffd9-daa2-40c3-8ce4-93f66c0ed0b4" />
+Terraform state output showing provisioned AWS resources, including ALB, ECS services, Route 53 records, and monitoring components.
+
+<img width="403" height="808" alt="Screenshot 2026-04-24 201151" src="https://github.com/user-attachments/assets/cca7af54-881f-427c-b786-3d9042158fb8" />
+<img width="441" height="730" alt="Screenshot 2026-04-24 201209" src="https://github.com/user-attachments/assets/4ee60904-3424-445c-9d51-7f211436e620" />
+<img width="387" height="710" alt="Screenshot 2026-04-24 201224" src="https://github.com/user-attachments/assets/a61a0c37-2a3b-473e-94b0-a343f0e53213" />
+Modular Terraform structure used to organize infrastructure components, including VPC, ECS, Lambda, S3, and networking layers.
+
+<img width="1919" height="982" alt="Screenshot 2026-04-21 113629" src="https://github.com/user-attachments/assets/952a4698-cfe1-4312-8e2d-dda7cd9308f4" />
+<img width="1901" height="748" alt="Screenshot 2026-04-21 114945" src="https://github.com/user-attachments/assets/8ca4676a-e88d-405c-8f86-04d3d4e1dbfc" />
+<img width="1833" height="738" alt="Screenshot 2026-04-21 115000" src="https://github.com/user-attachments/assets/71ed05f0-1035-4d06-a96e-be9dc7fdb2af" />
+<img width="403" height="808" alt="Screenshot 2026-04-24 201151" src="https://github.com/user-attachments/assets/4124306f-bb37-4166-83e6-68ffda1a8488" />
+<img width="1916" height="1032" alt="Screenshot 2026-04-21 113607" src="https://github.com/user-attachments/assets/cd155b56-5d44-41fc-9fe3-a39821c9d19f" />
+Separate development and production environments deployed with distinct configurations, enabling safe testing and controlled production releases.
+
+
+
+
+
+## 📸 System in Action
+
+The following screenshots demonstrate the live application and underlying AWS infrastructure components in action.
+### Live Application
+<img width="1915" height="949" alt="Screenshot 2026-04-26 132926" src="https://github.com/user-attachments/assets/ffb2c4ff-8f8d-4f9f-b4ba-ece70fc62778" />
+
+### Storage Layer (S3)
+<img width="1886" height="751" alt="Screenshot 2026-04-24 200057" src="https://github.com/user-attachments/assets/96730a32-4a99-40df-b03f-98eff8b64183" />
+
+
+### Data Layer (DynamoDB)
+<img width="1169" height="723" alt="Screenshot 2026-04-24 195631" src="https://github.com/user-attachments/assets/f2e315fd-4632-4eb3-8225-6a7ad50195ab" />
+
+
+
+### Compute Layer (ECS Fargate)
+<img width="1908" height="752" alt="Screenshot 2026-04-24 200859" src="https://github.com/user-attachments/assets/53471aa1-bf51-46e8-ba16-c2e3f8cfb12b" />
+<img width="1914" height="741" alt="Screenshot 2026-04-24 200718" src="https://github.com/user-attachments/assets/f104bd60-a73f-47ad-ab7e-3bee89e13837" />
+
+
+
+
 🔷 CI/CD Pipeline
 
 The application uses a modern CI/CD pipeline built with GitHub Actions:
