@@ -132,37 +132,49 @@ Consistent deployments
 Automated infrastructure updates
 Environment separation (dev vs prod)
 
-🔷 Infrastructure Components
-Compute
-ECS Fargate – Runs containerized application workloads
-AWS Lambda – Handles backend processing and AI integration
-Storage
-Amazon S3 – Stores uploaded images and static assets
-DynamoDB – Stores image metadata and AI-generated descriptions
-Networking
-Application Load Balancer (ALB) – Routes traffic to ECS services
-VPC with private subnets – Secure application infrastructure
-CI/CD
-GitHub Actions – Automates build and deployment workflows
-Amazon ECR – Stores Docker images
-AI Integration
-Amazon Bedrock – Generates image descriptions
-Supporting Services
-IAM – Access control and permissions
-CloudWatch – Logging and monitoring
-Route 53 – DNS routing
-ACM – SSL/TLS certificates
 
-🔷 Key Design Decisions
-Serverless + Containers Hybrid
-ECS for frontend scalability
-Lambda for event-driven backend logic
-Environment Separation
-Dev and Prod pipelines ensure safe testing before release
-Infrastructure as Code
-Terraform used for reproducible and version-controlled infrastructure
-Event-Driven Processing
-Image uploads trigger backend workflows asynchronously
+### 🔷 Infrastructure Components
+
+**Compute**
+- ECS Fargate – Runs containerized application workloads  
+- AWS Lambda – Handles backend processing and AI integration  
+
+**Storage**
+- Amazon S3 – Stores uploaded images and static assets  
+- DynamoDB – Stores image metadata and AI-generated descriptions  
+
+**Networking**
+- Application Load Balancer (ALB) – Routes traffic to ECS services  
+- VPC (public/private subnets) – Secures application infrastructure  
+
+**CI/CD**
+- GitHub Actions – Automates build and deployment workflows  
+- Amazon ECR – Stores Docker images  
+
+**AI Integration**
+- Amazon Bedrock – Generates image descriptions  
+
+**Supporting Services**
+- IAM – Access control and permissions  
+- CloudWatch – Logging and monitoring  
+- Route 53 – DNS routing  
+- ACM – SSL/TLS certificates  
+
+### 🔷 Key Design Decisions
+
+**Serverless + Containers Hybrid**
+- ECS for scalable application workloads  
+- Lambda for event-driven backend processing  
+
+**Environment Separation**
+- Dev and Prod pipelines ensure safe testing before release  
+
+**Infrastructure as Code**
+- Terraform enables reproducible and version-controlled infrastructure  
+
+**Event-Driven Processing**
+- Image uploads trigger backend workflows asynchronously  
+
 
 🔁 CI/CD Workflow
 
@@ -260,7 +272,7 @@ terraform {
     }
   }
 }
-3. GitHub Actions authentication failures
+1. GitHub Actions authentication failures
 
 Issue:
 Pipeline failed during Terraform execution.
@@ -273,7 +285,7 @@ Solution:
 Generated API token from HCP Terraform
 Added to GitHub Secrets
 Verified workflow authentication
-4. AWS credential configuration issues
+2. AWS credential configuration issues
 
 Issue:
 Terraform or pipeline could not provision AWS resources.
@@ -287,7 +299,7 @@ Configured IAM user with appropriate permissions
 Added credentials to GitHub Secrets
 Verified access via CLI and pipeline
 
-5. Infrastructure changes not reflecting
+3. Infrastructure changes not reflecting
 
 Issue:
 Changes pushed to the repository did not update infrastructure.
