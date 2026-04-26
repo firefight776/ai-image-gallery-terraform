@@ -1,4 +1,4 @@
-🚀 AI Image Gallery – DevOps Automation Platform
+🚀 AI Image Gallery – Terraform-Provisioned AWS Application with CI/CD
 📌 Overview
 
 Built and deployed a production-grade, Terraform-managed AWS platform with CI/CD pipelines, containerized services (ECS Fargate), and serverless workflows, enabling scalable AI-powered image processing with isolated dev and prod environments.
