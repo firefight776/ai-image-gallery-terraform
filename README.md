@@ -53,7 +53,7 @@ The UI is hosted in a Docker container running on AWS ECS Fargate.
 Traffic is routed through an Application Load Balancer for high availability.
 Image Upload Workflow
 When a user uploads an image:
-The request is sent to a backend endpoint (Lambda/API).
+The request is sent to a backend endpoint powered by AWS Lambda (via Function URL).
 The image is stored in an S3 bucket.
 Metadata & AI Processing
 A Lambda function processes the uploaded image.
@@ -109,7 +109,8 @@ DynamoDB table storing image metadata, including AI-generated descriptions. Each
 Application Load Balancer (ALB) handling incoming traffic and routing requests to ECS services. HTTP traffic is automatically redirected to HTTPS, and secure requests are forwarded to the target group associated with the containerized application.
 
 ### Compute Layer (ECS Fargate)
-<img width="1908" height="752" alt="Screenshot 2026-04-24 200859" src="https://github.com/user-attachments/assets/d8a5b595-a417-47e2-831b-c78e9c37a4eb" />
+<img width="1919" height="739" alt="Screenshot 2026-04-24 200312" src="https://github.com/user-attachments/assets/9b41b526-9104-4637-9223-b778617253bb" />
+
 Amazon ECS Fargate cluster running the containerized application workload, with one active service maintaining two running tasks for high availability, fault tolerance, and scalable compute.
 
 
@@ -133,7 +134,7 @@ Environment separation (dev vs prod)
 
 🔷 Infrastructure Components
 Compute
-ECS Fargate – Runs containerized frontend application
+ECS Fargate – Runs containerized application workloads
 AWS Lambda – Handles backend processing and AI integration
 Storage
 Amazon S3 – Stores uploaded images and static assets
@@ -214,8 +215,6 @@ Consistent and repeatable deployments
 🔐 Authentication & State Management
 
 Terraform state is managed in HCP Terraform
-CLI authentication:
-terraform login
 GitHub Actions uses:
 TF_API_TOKEN for HCP access
 AWS credentials via GitHub Secrets
