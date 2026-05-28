@@ -44,6 +44,11 @@ GitHub Actions → CI/CD pipeline for automated deployments
 This project implements a production-style AI image gallery application deployed on AWS using Infrastructure as Code and a CI/CD pipeline.
 At a high level, the system enables users to upload images, store them in the cloud, and generate AI-powered descriptions using a serverless backend.
 
+🔷 Architecture Diagram
+
+![AI Image Gallery Architecture](README-assets/aws-ai-image-gallery-terraform-provisioned-diagram.png)
+
+
 🔷 System Flow (End-to-End)
 User Interaction
 Users access the application via a public URL routed through DNS.
